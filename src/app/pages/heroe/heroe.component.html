@@ -5,18 +5,21 @@
     <div class="col"></div>
     <button class="btn btn-danger"
             [routerLink]="['/heroes']">
-        <i class="fa fa-arrow-left"></i>
+        <i class="fa fa-arrow-left"> Regresar </i>
     </button>
 </div>
 
 <div class="row animate__animated animate__fadeIn animate__slow">
     <div class="col">
 
-        <form action="">
+        <form (ngSubmit)="guardar( f )" #f="ngForm">
             <div class="form-group">
                 <label>Firease ID</label>
                 <input type="text"
                        class="form-control"
+                       placeholder="Firebase ID"
+                       [(ngModel)]="heroe.id" 
+                       name ="id"
                        disabled="disabled" >
                  <small class="form-text text-muted">este campo es autogenerado</small>      
             </div>
@@ -26,6 +29,8 @@
                 <input type="text"
                        class="form-control"
                        placeholder="Nombre del heroe" 
+                       [(ngModel)]="heroe.nombre" 
+                       name ="nombre"
                        required>
             </div>
 
@@ -33,18 +38,24 @@
                 <label>Poder</label>
                 <input type="text"
                        class="form-control"
-                       placeholder="Poder del heroe">
+                       placeholder="Poder del heroe"
+                       [(ngModel)]="heroe.poder" 
+                       name ="poder">
             </div>
 
             <div class="form-group">
                 <label>Estado</label>
                 <br>
-                <button class="btn btn-outline-success w-50" type="button">
+                <button *ngIf="heroe.vivo" 
+                        (click)="heroe.vivo = false"
+                        class="btn btn-outline-success w-50" type="button">
                     <i class="fa fa-smile-wink"></i>
                     Vivo
                 </button>
 
-                <button class="btn btn-outline-danger w-50" type="button">
+                <button *ngIf="!heroe.vivo" 
+                        (click)="heroe.vivo = true"
+                        class="btn btn-outline-danger w-50" type="button">
                     <i class="fa fa-dizzy"></i>
                     Vivo
                 </button>
